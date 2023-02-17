@@ -11,7 +11,12 @@ class UserController {
     }
 
     async createUser(req, res) {
-        // código pra criar novo usuário
+        try {   
+            const response = await User.create();
+            res.status(response.status).json(response.response);
+          } catch (error) {
+            res.status(500).json(error);
+        }
     }
 
     async deleteUser(req, res) {
