@@ -3,9 +3,8 @@ const router = express.Router();
 const HomeController = require('../controllers/HomeController');
 const UserController = require('../controllers/UserController');
 
-
-
 router.get('/', HomeController.index);
 router.get('/api/createUser', UserController.createUser);
+router.get('/api/getAllUsers', UserController.getAllUsers);
 
-module.exports = router ;
+module.exports = router;

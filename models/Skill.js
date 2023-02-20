@@ -1,6 +1,6 @@
 const knex = require('../database/connection');
 
-class Home {
+class Skill {
 }
 
-module.exports = new Home();
+module.exports = new Skill();

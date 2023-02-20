@@ -1,6 +1,6 @@
 const knex = require('../database/connection');
 
-class Home {
+class Lobby {
 }
 
-module.exports = new Home();
+module.exports = new Lobby();

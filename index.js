@@ -20,4 +20,4 @@ io.on('connection', function(socket){
 
 server.listen(port, () => {
     console.log("Servidor rodando em http://localhost:3000")
-}); 
+});

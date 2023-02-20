@@ -2,19 +2,19 @@ const User = require('../models/User');
 
 class UserController {
     async getAllUsers(req, res) {
-      try {
-        const users = await User.findAll();
-        res.status(course.status).json(course.response);
-      } catch (error) {
-        res.status(500).json(error);
-      }
+        try {
+            const users = await User.findAll();
+            res.status(users.status).json(users.response);
+        } catch (error) {
+            res.status(500).json(error);
+        }
     }
 
     async createUser(req, res) {
         try {   
             const response = await User.create();
             res.status(response.status).json(response.response);
-          } catch (error) {
+            } catch (error) {
             res.status(500).json(error);
         }
     }
