@@ -1,7 +1,7 @@
 class HomeController {
     async index(req, res) {
-      res.send('Conectou-se com a API');
+      res.status(200).json('Conectou-se com a API');
     }
   }
   
-  module.exports = new HomeController();
+module.exports = new HomeController();
