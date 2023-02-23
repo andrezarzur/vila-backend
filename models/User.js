@@ -1,11 +1,11 @@
 const knex = require('../database/connection');
 
 class User {
-  async create() {
+  async create(name) {
     try {
       const user = await knex.insert({
-        name: 'andre zarzur', email: 'andrezarzur@hotmail.com',
-      }).table('user');
+        name: name,
+      }).table('user').returning();
       return { response: user[0], status: 200 };
     } catch (error) {
       console.log(error);

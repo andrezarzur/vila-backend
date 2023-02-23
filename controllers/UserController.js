@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Validate = require('../modules/validate');
 
 class UserController {
     async getAllUsers(req, res) {
@@ -12,7 +13,17 @@ class UserController {
 
     async createUser(req, res) {
         try {   
-            const response = await User.create();
+            const {
+                name
+            } = req.body;
+            const data = {
+                name: name,
+            };
+            const val = Validate(data);
+            console.log('ass')
+            if (val !== true) return res.status(400).json(val);
+
+            const response = await User.create(name);
             res.status(response.status).json(response.response);
             } catch (error) {
             res.status(500).json(error);
