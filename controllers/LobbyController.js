@@ -16,7 +16,7 @@ class LobbyController {
             if (val !== true) return res.status(400).json(val);
 
             const lobby = await Lobby.create(name, capacity, userId);
-            res.status(users.status).json(users.response);
+            res.status(lobby.status).json(lobby.response);
         } catch (error) {
             res.status(500).json(error);
         }
