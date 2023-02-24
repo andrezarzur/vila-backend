@@ -25,17 +25,15 @@ class LobbyController {
     async deleteLobby(req, res) {
         try {
             const {
-                name, capacity, userId
+                lobbyId
             } = req.body;
             const data = {
-                name: name,
-                capacity: capacity,
-                userId: userId
+                lobbyId: lobbyId,
             };
             const val = Validate(data);
             if (val !== true) return res.status(400).json(val);
 
-            const lobby = await Lobby.create(name, capacity, userId);
+            const lobby = await Lobby.delete(lobbyId);
             res.status(lobby.status).json(lobby.response);
         } catch (error) {
             res.status(500).json(error);

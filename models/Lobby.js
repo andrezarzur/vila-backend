@@ -26,6 +26,16 @@ class Lobby {
         }   
     }
 
+    async delete(lobbyId) {
+        try {
+            await knex.delete('*').table('lobby').where({ id: lobbyId });
+            return { response: 'Lobby deletado com sucesso', status: 200 };
+          } catch (error) {
+            console.log(error);
+            return { response: 'Erro ao criar lobby', status: 404 };
+        }   
+    }
+
     async join(userId, lobbyId) {
         try {
             await knex.insert({
