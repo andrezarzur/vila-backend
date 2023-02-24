@@ -11,6 +11,6 @@ router.get('/api/getAllUsers', UserController.getAllUsers);
 router.get('/api/getAllLobbys', LobbyController.getAllLobbys);
 router.post('/api/createLobby', LobbyController.createLobby);
 router.post('/api/joinLobby', LobbyController.joinLobby);
-router.delete('/api/deleteLobby', LobbyController.deleteLobby)
+router.post('/api/deleteLobby', LobbyController.deleteLobby)
 
 module.exports = router;
