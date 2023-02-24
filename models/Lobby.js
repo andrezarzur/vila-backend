@@ -57,6 +57,20 @@ class Lobby {
             return { response: 'Erro ao resgatar lobby', status: 404 };
         }
     }
+
+    async getUsers(lobbyId) {
+        try {
+            const users = await knex.select('*')
+                .from('user_lobby AS ul')
+                .leftJoin('user AS u', 'u.id', 'ul.userId')
+                .where({ lobbyId: lobbyId })
+            if (users.length === 0) return { response: 'Lobby sem usuários', status: 404 };
+            return { response: users, status: 200 };
+          } catch (error) {
+            console.log(error);
+            return { response: 'Erro ao resgatar lobby', status: 404 };
+        }
+    }
 }
 
 module.exports = new Lobby();

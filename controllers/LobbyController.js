@@ -86,6 +86,24 @@ class LobbyController {
             res.status(500).json(error);
         }
     }
+
+    async getUsersInLobby(req, res) {
+        try {
+            const {
+                lobbyId
+            } = req.body;
+            const data = {
+                lobbyId: lobbyId,
+            };
+            const val = Validate(data);
+            if (val !== true) return res.status(400).json(val);
+
+            const users = await Lobby.getUsers(lobbyId);
+            res.status(users.status).json(users.response);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
 }
   
 module.exports = new LobbyController();
