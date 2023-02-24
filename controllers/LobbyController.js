@@ -22,7 +22,46 @@ class LobbyController {
         }
     }
 
+    async deleteLobby(req, res) {
+        try {
+            const {
+                name, capacity, userId
+            } = req.body;
+            const data = {
+                name: name,
+                capacity: capacity,
+                userId: userId
+            };
+            const val = Validate(data);
+            if (val !== true) return res.status(400).json(val);
+
+            const lobby = await Lobby.create(name, capacity, userId);
+            res.status(lobby.status).json(lobby.response);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
     async joinLobby(req, res) {
+        try {
+            const {
+                userId, lobbyId
+            } = req.body;
+            const data = {
+                userId: userId,
+                lobbyId: lobbyId,
+            };
+            const val = Validate(data);
+            if (val !== true) return res.status(400).json(val);
+
+            const lobby = await Lobby.join(userId, lobbyId);
+            res.status(lobby.status).json(lobby.response);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    async removeFromLobby(req, res) {
         try {
             const {
                 userId, lobbyId

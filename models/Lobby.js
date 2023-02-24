@@ -19,7 +19,7 @@ class Lobby {
             await knex.insert({
                 userId: userId,  lobbyId: lobbyId, isLeader: true, isDead: false
             }).table('user_lobby')
-            return { response: 'Lobby criado com sucesso', status: 200 };
+            return { response: lobbyId, status: 200 };
           } catch (error) {
             console.log(error);
             return { response: 'Erro ao criar lobby', status: 404 };
