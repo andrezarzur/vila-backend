@@ -41,7 +41,21 @@ class Lobby {
             await knex.insert({
                 userId: userId,  lobbyId: lobbyId, isLeader: false, isDead: false
             }).table('user_lobby')
-            return { response: 'Entrou com sucesso', status: 200 };
+
+
+
+            return { response: lobbyId, status: 200 };
+          } catch (error) {
+            console.log(error);
+            return { response: 'Erro ao entrar no lobby', status: 404 };
+        }
+    }
+
+    async exit(userId, lobbyId) {
+        try {
+            await knex.delete('*').table('user_lobby').where({ userId: userId, lobbyId: lobbyId});
+
+            return { response: 'lobbyId', status: 200 };
           } catch (error) {
             console.log(error);
             return { response: 'Erro ao entrar no lobby', status: 404 };

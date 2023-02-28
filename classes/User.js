@@ -1,6 +1,4 @@
 class User {
-
-    users = [];
     socket = undefined;
     name = undefined;
   
@@ -12,10 +10,6 @@ class User {
     setName(name) {
         this.name = name;
     }
-
-    addUser(user) {
-        this.list.push(user);
-    } 
     
     removeUser(id) {
         this.list = this.list.filter(u => u.socket.id !== id);
