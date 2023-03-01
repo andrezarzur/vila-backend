@@ -16,11 +16,12 @@ module.exports = function (io) {
         })
 
         socket.on('joinLobby', async (lobbyData) => {
-            await Lobby.join(lobbyData.userId, lobbyData.lobbyId)
-
             const users = (await Lobby.getUsers(lobbyData.lobbyId)).response
-
-            io.emit(`update ${lobbyData.lobbyId}`, users);
+            if (!users.some((u) => u.id === lobbyData.userId)) {
+                await Lobby.join(lobbyData.userId, lobbyData.lobbyId)
+            }
+            const users2 = (await Lobby.getUsers(lobbyData.lobbyId)).response
+            io.emit(`update ${lobbyData.lobbyId}`, users2);
         })
 
         socket.on('exitLobby', async (lobbyData) => {
@@ -28,7 +29,8 @@ module.exports = function (io) {
 
             const users = (await Lobby.getUsers(lobbyData.lobbyId)).response
 
-            if (!users.length === 0) {
+            if (!(users.length === 0)) {
+                console.log('entrou')
                 io.emit(`update ${lobbyData.lobbyId}`, users);
             }
         })
