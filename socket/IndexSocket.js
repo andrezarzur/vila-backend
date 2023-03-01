@@ -28,7 +28,9 @@ module.exports = function (io) {
 
             const users = (await Lobby.getUsers(lobbyData.lobbyId)).response
 
-            io.emit(`update ${lobbyData.lobbyId}`, users);
+            if (!users.length === 0) {
+                io.emit(`update ${lobbyData.lobbyId}`, users);
+            }
         })
     });
 };
