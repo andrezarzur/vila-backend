@@ -11,6 +11,8 @@ module.exports = function (io) {
 
         socket.on('disconnect', () => {
             OnlineUsers.removeUser(user)
+
+            
         })
 
         socket.on('joinLobby', async (lobbyData) => {
