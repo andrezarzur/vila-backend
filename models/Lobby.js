@@ -78,7 +78,10 @@ class Lobby {
                 .from('user_lobby AS ul')
                 .leftJoin('user AS u', 'u.id', 'ul.userId')
                 .where({ lobbyId: lobbyId })
-            if (users.length === 0) return { response: 'Lobby sem usuários', status: 404 };
+            if (users.length === 0) {
+                await knex.delete('*').from('lobby').where({ id: lobbyId })
+                return { response: [], status: 404 };
+            }
             return { response: users, status: 200 };
           } catch (error) {
             console.log(error);
